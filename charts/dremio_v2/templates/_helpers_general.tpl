@@ -84,3 +84,30 @@ tolerations:
   {{- toYaml $adminPodTolerations | nindent 2 }}
 {{- end -}}
 {{- end -}}
+
+{{/*
+NAS Distributed Storage Peristent Volume Claims
+*/}}
+{{- define "dremio.distStorage.nas.volumeClaimTemplate" -}}
+{{- if (eq $.Values.distStorage.type "nas") -}}
+{{- $nasConfig := $.Values.distStorage.nas -}}
+- metadata:
+    name: dremio-dist-storage
+  spec:
+    accessModes: ["ReadWriteMany"]
+    storageClassName: {{ $nasConfig.storageClass }}
+    resources:
+      requests:
+        storage: {{ $nasConfig.size }}
+{{- end -}}
+{{- end -}}
+
+{{/*
+NAS Distributed Storage Peristent Volume Mounts
+*/}}
+{{- define "dremio.distStorage.nas.volumeMounts" -}}
+{{- if (eq $.Values.distStorage.type "nas") -}}
+- name: dremio-dist-storage
+  mountPath: /opt/dremio/dist
+{{- end -}}
+{{- end -}}
