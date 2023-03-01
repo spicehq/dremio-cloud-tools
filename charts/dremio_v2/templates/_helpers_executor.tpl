@@ -10,7 +10,10 @@ Executor - Dremio Heap Memory Allocation
 {{- if gt 4096 $engineMemory -}}
 {{ fail "Dremio's minimum memory requirement is 4 GB." }}
 {{- end -}}
-{{- if le 32786 $engineMemory -}}
+{{- $executorHeapMemory := int (default $context.Values.executor.heapMemory $engineConfiguration.heapMemory) -}}
+{{- if gt $executorHeapMemory 0 -}}
+{{ $executorHeapMemory }}
+{{- else if le 32786 $engineMemory -}}
 8192
 {{- else if le 6144 $engineMemory -}}
 4096
@@ -30,7 +33,10 @@ Executor - Dremio Direct Memory Allocation
 {{- if gt 4096 $engineMemory -}}
 {{ fail "Dremio's minimum memory requirement is 4 GB." }}
 {{- end -}}
-{{- if le 32786 $engineMemory -}}
+{{- $executorDirectMemory := int (default $context.Values.executor.directMemory $engineConfiguration.directMemory) -}}
+{{- if gt $executorDirectMemory 0 -}}
+{{ $executorDirectMemory }}
+{{- else if le 32786 $engineMemory -}}
 {{- sub $engineMemory 8192 -}}
 {{- else if le 6144 $engineMemory -}}
 {{- sub $engineMemory 6144 -}}
