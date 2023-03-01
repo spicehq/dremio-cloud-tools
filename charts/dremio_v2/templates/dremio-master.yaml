@@ -216,6 +216,7 @@ spec:
             path: tls.crt
       {{- end }}
       {{- include "dremio.coordinator.extraVolumes" $ | nindent 6 }}
+      {{- include "dremio.distStorage.nas.volume" $ | nindent 6 }}
       {{- include "dremio.imagePullSecrets" $ | nindent 6 }}
   volumeClaimTemplates:
   - metadata:
@@ -226,5 +227,4 @@ spec:
       resources:
         requests:
           storage: {{ $.Values.coordinator.volumeSize }}
-  {{- include "dremio.distStorage.nas.volumeClaimTemplate" $ | nindent 2 }}
 {{- end -}}

@@ -295,8 +295,7 @@ distStorage:
   type: "local"
 
   nas:
-    size: 5Ti
-    storageClass: local-dremio-dist
+    claimName: dremio-dist-nfs-pvc
 
   # Google Cloud Storage
   #

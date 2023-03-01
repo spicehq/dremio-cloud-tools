@@ -86,19 +86,14 @@ tolerations:
 {{- end -}}
 
 {{/*
-NAS Distributed Storage Peristent Volume Claims
+NAS Distributed Storage Volume
 */}}
-{{- define "dremio.distStorage.nas.volumeClaimTemplate" -}}
+{{- define "dremio.distStorage.nas.volume" -}}
 {{- if (eq $.Values.distStorage.type "nas") -}}
 {{- $nasConfig := $.Values.distStorage.nas -}}
-- metadata:
-    name: dremio-dist-storage
-  spec:
-    accessModes: ["ReadWriteMany"]
-    storageClassName: {{ $nasConfig.storageClass }}
-    resources:
-      requests:
-        storage: {{ $nasConfig.size }}
+- name: dremio-dist-storage
+  persistentVolumeClaim:
+    claimName: {{ $nasConfig.claimName }}
 {{- end -}}
 {{- end -}}
 
