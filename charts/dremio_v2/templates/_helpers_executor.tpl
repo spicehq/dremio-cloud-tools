@@ -156,6 +156,17 @@ Executor - Pod Extra Volume Mounts
 {{- end -}}
 {{- end -}}
 
+
+{{/*
+Executor - Pod Extra Ports
+*/}}
+{{- define "dremio.executor.extraPorts" -}}
+{{- $executorExtraPorts := default (default (dict) $.Values.extraPorts) $.Values.executor.extraPorts -}}
+{{- if $executorExtraPorts -}}
+{{ toYaml $executorExtraPorts }}
+{{- end -}}
+{{- end -}}
+
 {{/*
 Executor - Persistent Volume Storage Class
 */}}

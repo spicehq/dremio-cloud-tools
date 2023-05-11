@@ -79,6 +79,16 @@ Coordinator - Pod Extra Volume Mounts
 {{- end -}}
 
 {{/*
+Coordinator - Pod Extra Ports
+*/}}
+{{- define "dremio.coordinator.extraPorts" -}}
+{{- $coordinatorExtraPorts := default (default (dict) $.Values.extraPorts) $.Values.coordinator.extraPorts -}}
+{{- if $coordinatorExtraPorts -}}
+{{ toYaml $coordinatorExtraPorts }}
+{{- end -}}
+{{- end -}}
+
+{{/*
 Coordinator - Pod Extra Volumes
 */}}
 {{- define "dremio.coordinator.extraVolumes" -}}
