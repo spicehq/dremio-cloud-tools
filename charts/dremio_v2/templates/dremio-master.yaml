@@ -103,8 +103,8 @@ spec:
             scheme: HTTPS
             {{- end }}
             port: web
-          failureThreshold: 10
-          periodSeconds: 5
+          failureThreshold: 60
+          periodSeconds: 120
         readinessProbe:
           httpGet:
             path: /
