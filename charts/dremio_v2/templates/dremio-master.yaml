@@ -228,6 +228,7 @@ spec:
       {{- include "dremio.coordinator.extraVolumes" $ | nindent 6 }}
       {{- include "dremio.distStorage.nas.volume" $ | nindent 6 }}
       {{- include "dremio.imagePullSecrets" $ | nindent 6 }}
+  {{- if $.Values.coordinator.volumeClaimEnabled }}
   volumeClaimTemplates:
   - metadata:
       name: dremio-master-volume
@@ -237,4 +238,5 @@ spec:
       resources:
         requests:
           storage: {{ $.Values.coordinator.volumeSize }}
+  {{- end -}}
 {{- end -}}
