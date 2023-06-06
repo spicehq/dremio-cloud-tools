@@ -86,6 +86,26 @@ tolerations:
 {{- end -}}
 
 {{/*
+Admin - Pod Extra Volumes
+*/}}
+{{- define "dremio.admin.extraVolumes" -}}
+{{- $adminExtraVolumes := coalesce $.Values.admin.extraVolumes $.Values.extraVolumes -}}
+{{- if $adminExtraVolumes -}}
+{{ toYaml $adminExtraVolumes }}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Admin - Pod Extra Volume Mounts
+*/}}
+{{- define "dremio.admin.extraVolumeMounts" -}}
+{{- $adminExtraVolumeMounts := default (default (dict) $.Values.extraVolumeMounts) $.Values.admin.extraVolumeMounts -}}
+{{- if $adminExtraVolumeMounts -}}
+{{ toYaml $adminExtraVolumeMounts }}
+{{- end -}}
+{{- end -}}
+
+{{/*
 NAS Distributed Storage Volume
 */}}
 {{- define "dremio.distStorage.nas.volume" -}}
