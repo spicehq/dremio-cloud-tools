@@ -69,6 +69,16 @@ Coordinator - Pod Extra Init Containers
 {{- end -}}
 
 {{/*
+Coordinator - Pod Sidecars
+*/}}
+{{- define "dremio.coordinator.sidecars" -}}
+{{- $coordinatorSidecars := coalesce $.Values.coordinator.sidecars $.Values.sidecars -}}
+{{- if $coordinatorSidecars -}}
+{{ tpl $coordinatorSidecars $ }}
+{{- end -}}
+{{- end -}}
+
+{{/*
 Coordinator - Pod Extra Volume Mounts
 */}}
 {{- define "dremio.coordinator.extraVolumeMounts" -}}
