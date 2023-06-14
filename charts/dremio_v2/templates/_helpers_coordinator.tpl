@@ -74,7 +74,7 @@ Coordinator - Pod Sidecars
 {{- define "dremio.coordinator.sidecars" -}}
 {{- $coordinatorSidecars := coalesce $.Values.coordinator.sidecars $.Values.sidecars -}}
 {{- if $coordinatorSidecars -}}
-{{ tpl $coordinatorSidecars $ }}
+{{ toYaml $coordinatorSidecars }}
 {{- end -}}
 {{- end -}}
 
