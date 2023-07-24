@@ -68,6 +68,19 @@ Executor - Memory Resource Request
 {{- end -}}
 
 {{/*
+Executor - Ephemeral Storage Request
+*/}}
+{{- define "dremio.executor.ephemeralStorage" -}}
+{{- $context := index . 0 -}}
+{{- $engineName := index . 1 -}}
+{{- $engineConfiguration := default (dict) (get (default (dict) $context.Values.executor.engineOverride) $engineName) -}}
+{{- $engineEphemeralStorage := default ($context.Values.executor.ephemeralStorage) $engineConfiguration.ephemeralStorage -}}
+{{- if $engineEphemeralStorage -}}
+ephemeral-storage: {{ $engineEphemeralStorage }}Gi
+{{- end -}}
+{{- end -}}
+
+{{/*
 Executor - Replication Count
 */}}
 {{- define "dremio.executor.count" -}}

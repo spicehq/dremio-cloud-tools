@@ -38,6 +38,7 @@ spec:
           requests:
             cpu: {{ template "dremio.executor.cpu" (list $ $engineName) }}
             memory: {{ template "dremio.executor.memory" (list $ $engineName) }}
+            {{- include "dremio.executor.ephemeralStorage" (list $ $engineName) | nindent 12}}
         volumeMounts:
         - name: {{ template "dremio.executor.volumeClaimName" (list $ $engineName) }}
           mountPath: /opt/dremio/data
