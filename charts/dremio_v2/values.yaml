@@ -173,6 +173,7 @@ executor:
   # persistent volume storage that resides far from the physical node.
   cloudCache:
     enabled: true
+    createPVC: true
 
     # Uncomment this value to use a different storage class for C3.
     #storageClass:

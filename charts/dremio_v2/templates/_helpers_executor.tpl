@@ -204,6 +204,7 @@ Executor - Cloud Cache Peristent Volume Claims
 {{- $cloudCacheConfig := coalesce $engineConfiguration.cloudCache $context.Values.executor.cloudCache -}}
 {{- $cloudCacheStorageClass := coalesce $engineCloudCacheConfig.storageClass $context.Values.executor.cloudCache.storageClass $engineConfiguration.storageClass $context.Values.executor.storageClass $context.Values.storageClass -}}
 {{- if $cloudCacheConfig.enabled -}}
+{{- if $cloudCacheConfig.createPVC -}}
 {{- range $index, $cloudCacheVolumeConfig := $cloudCacheConfig.volumes }}
 {{- $volumeStorageClass := coalesce $cloudCacheVolumeConfig.storageClass $cloudCacheStorageClass }}
 - metadata:
@@ -216,6 +217,7 @@ Executor - Cloud Cache Peristent Volume Claims
     resources:
       requests:
         storage: {{ $cloudCacheVolumeConfig.size }}
+{{- end -}}
 {{- end -}}
 {{- end -}}
 {{- end -}}
