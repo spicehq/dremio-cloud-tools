@@ -104,8 +104,8 @@ spec:
             scheme: HTTPS
             {{- end }}
             port: web
-          failureThreshold: 60
-          periodSeconds: 120
+          failureThreshold: {{ $.Values.coordinator.startupProbe.failureThreshold }}
+          periodSeconds: {{ $.Values.coordinator.startupProbe.periodSeconds }}
         readinessProbe:
           httpGet:
             path: /
