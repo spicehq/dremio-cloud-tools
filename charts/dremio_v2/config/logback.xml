@@ -164,7 +164,7 @@
   </logger>
 
   <logger name="com.dremio.exec.catalog.SourceMetadataManager" additivity="false">
-    <level value="${dremio.log.level:-info}"/>
+    <level value="${dremio.log.level:-{{ $.Values.logging.metadataLevel }}}"/>
     <if condition='isDefined("dremio.log.path")'>
       <then>
         <appender-ref ref="metadata_refresh"/>
