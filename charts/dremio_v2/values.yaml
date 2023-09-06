@@ -35,6 +35,9 @@ tolerations: []
 
 # Dremio Coordinator
 coordinator:
+  startupProbe:
+    failureThreshold: 60
+    periodSeconds: 120
   # CPU & Memory
   # Memory allocated to each coordinator, expressed in MB.
   # CPU allocated to each coordinator, expressed in CPU cores.
@@ -481,3 +484,6 @@ service:
 # https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod
 # imagePullSecrets:
 #  - secretname
+
+logging:
+  metadataLevel: 'info'
