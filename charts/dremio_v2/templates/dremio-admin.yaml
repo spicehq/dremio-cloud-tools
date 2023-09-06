@@ -29,6 +29,7 @@ spec:
     - name: dremio-config
       mountPath: /opt/dremio/conf
     {{- include "dremio.admin.extraVolumeMounts" $ | nindent 4 }}
+    {{- include "dremio.distStorage.nas.volumeMounts" $ | nindent 8 }}
     command: ["sleep", "infinity"]
   {{- include "dremio.imagePullSecrets" $ | nindent 2 }}
   {{- include "dremio.admin.nodeSelector" $ | nindent 2 }}
@@ -41,4 +42,5 @@ spec:
     configMap:
       name: dremio-config
   {{- include "dremio.admin.extraVolumes" $ | nindent 2 }}
+  {{- include "dremio.distStorage.nas.volume" $ | nindent 6 }}
 {{- end -}}

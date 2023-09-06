@@ -89,6 +89,17 @@ Coordinator - Pod Extra Volume Mounts
 {{- end -}}
 
 {{/*
+Admin - Pod Extra Volume Mounts
+*/}}
+{{- define "dremio.admin.extraVolumeMounts" -}}
+{{- $coordinatorExtraVolumeMounts := default (default (dict) $.Values.extraVolumeMounts) $.Values.coordinator.extraVolumeMounts -}}
+{{- if $coordinatorExtraVolumeMounts -}}
+{{ toYaml $coordinatorExtraVolumeMounts }}
+{{- end -}}
+{{- end -}}
+
+
+{{/*
 Secondary Coordinator - Pod Extra Volume Mounts
 */}}
 {{- define "dremio.coordinator.extraSecondaryVolumeMounts" -}}
@@ -105,6 +116,16 @@ Coordinator - Pod Extra Ports
 {{- $coordinatorExtraPorts := default (default (dict) $.Values.extraPorts) $.Values.coordinator.extraPorts -}}
 {{- if $coordinatorExtraPorts -}}
 {{ toYaml $coordinatorExtraPorts }}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Admin - Pod Extra Volumes
+*/}}
+{{- define "dremio.admin.extraVolumes" -}}
+{{- $coordinatorExtraVolumes := coalesce $.Values.coordinator.extraVolumes $.Values.extraVolumes -}}
+{{- if $coordinatorExtraVolumes -}}
+{{ toYaml $coordinatorExtraVolumes }}
 {{- end -}}
 {{- end -}}
 
