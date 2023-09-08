@@ -453,6 +453,7 @@ extraVolumeMounts: []
 # The dremio-client service exposes the service for access outside of the Kubernetes cluster.
 service:
   type: LoadBalancer
+  name: dremio-client
 
   # These values, when defined and not empty, override the provided shared annotations and labels.
   # Uncomment only if you are trying to override the chart's shared values.
