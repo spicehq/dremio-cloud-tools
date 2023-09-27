@@ -113,8 +113,8 @@ spec:
             scheme: HTTPS
             {{- end }}
             port: web
-          failureThreshold: 2
-          periodSeconds: 5
+          failureThreshold: {{ $.Values.coordinator.readinessProbe.failureThreshold }}
+          periodSeconds: {{ $.Values.coordinator.readinessProbe.periodSeconds }}
       initContainers:
       {{- include "dremio.coordinator.extraInitContainers" $ | nindent 6 }}
       - name: start-only-one-dremio-master
@@ -122,7 +122,7 @@ spec:
         command: ["sh", "-c", "INDEX=${HOSTNAME##*-}; if [ $INDEX -ne 0 ]; then echo Only one master should be running.; exit 1; fi; "]
       - name: wait-for-zookeeper
         image: busybox
-        command:  ["sh", "-c", "until ping -c 1 -W 1 zk-hs > /dev/null; do echo Waiting for Zookeeper to be ready.; sleep 2; done;"]
+        command:  ["sh", "-c", "until nc zk-hs 2181 -w1 > /dev/null; do echo Waiting for Zookeeper to be ready.; sleep 2; done;"]
       - name: chown-data-directory
         image: {{ $.Values.image }}:{{ $.Values.imageTag }}
         imagePullPolicy: IfNotPresent
