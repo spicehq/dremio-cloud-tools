@@ -124,13 +124,13 @@ spec:
           exec:
             command: ["/bin/bash", "-c", "[ \"$(echo ruok | nc 127.0.0.1 2181)\" == \"imok\" ]" ]
           initialDelaySeconds: 10
-          periodSeconds: 15
+          periodSeconds: 10
           timeoutSeconds: 15
         livenessProbe:
           exec:
             command: ["/bin/bash", "-c", "[ \"$(echo ruok | nc 127.0.0.1 2181)\" == \"imok\" ]" ]
           initialDelaySeconds: 10
-          periodSeconds: 15
+          periodSeconds: 10
           timeoutSeconds: 15
           failureThreshold: 2
         volumeMounts:
